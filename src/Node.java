@@ -5,7 +5,16 @@ public class Node {
 
 
 
+    Node ()
+    {
+        this.value = -1;
+        this.left = null;
+        this.right= null;
+
+    }
+
     // Constructor to initialize a new node using integer as the value.
+
     Node (Integer value)
     {
         this.value = value;

@@ -6,7 +6,7 @@ public class Main {
     {
         System.out.println("Trees");
         Scanner input = new Scanner(System.in);
-        Node root = new Node(-1);
+        Node root = new Node();
 //        Integer tempInput = input.nextInt();
 //        if(tempInput != -1)
 //        {
