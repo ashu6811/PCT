@@ -17,9 +17,82 @@ public class Hashing {
         return num%N;
     }
 
-    public Integer recursivePosition(Integer num, Integer[] hashtable, Integer N)
+    public void recursivePosition(Integer num, Integer[] hashtable, Integer N, Integer pos)
     {
-        // full fill the recursive call position
+
+        if (num / 10 == 0)
+        {
+
+            if(hashtable[pos] == null)
+            {
+                hashtable[pos] = num;
+                System.out.print(pos +"\n");
+                return ;
+            }
+            else
+            {
+
+                if(num %2 == 0 || num == 0)
+                {
+
+                        System.out.print(pos + " ");
+                        while (hashtable[pos] != null)
+                        {
+                            System.out.print(pos + " ");
+                            pos = (pos-1 + N ) %N;
+                        }
+                        System.out.print(pos + "\n");
+                        hashtable[pos] = num ;
+                        return;
+
+                }
+                else
+                {
+
+                        System.out.print(pos + " ");
+                        while (hashtable[pos] != null)
+                        {
+                            System.out.print(pos + " ");
+                            pos = (pos+1 + N ) %N;
+                        }
+                        System.out.print(pos + "\n");
+                        hashtable[pos] = num ;
+                        return;
+
+                }
+            }
+        }
+        else
+        {
+            System.out.print(pos + " ");
+            if(hashtable[pos] == null)
+            {
+                hashtable[pos] = num;
+                System.out.print("\n");
+                return ;
+
+
+            }
+            else
+            {
+                Integer righMostDigit = lastDigit(num);
+                Integer newNum = removeLastDigit(num);
+                Integer j = newNum%num;
+
+                if (righMostDigit%2 == 0)
+                {
+                    pos = (pos -j + N)%N;
+                    recursivePosition(newNum, hashtable, N, pos);
+                }
+                else
+                {
+                    pos = (pos +j + N)%N;
+                    recursivePosition(newNum, hashtable, N, pos);
+                }
+            }
+        }
+
+
     }
 
     public static void main (String [] args)
@@ -34,26 +107,22 @@ public class Hashing {
 
         for(i=0;i<N;i++)
         {
-            raw[i] = input.nextInt();
+            hashtable[i] = null;
         }
 
-        for(i=0; i<N ; i++)
+        i =0;
+        Integer tempInput = input.nextInt();
+        while(tempInput !=-1)
         {
-            if(hashtable[hashing.findPlace(raw[i], N)] != 0)
-            {
-                hashtable[hashing.findPlace(raw[i], N)] = raw[i];
-                System.out.print(i);
-            }
-            else
-            {
-                // when position doesn't match
-                hashtable[hashing.recursivePosition()] = raw[i];
+            raw[i] = tempInput;
+            tempInput = input.nextInt();
+            i++;
+        }
 
-            }
-
-
-
-            System.out.print("\n");
+        Integer count = i;
+        for(i=0; i<count ; i++)
+        {
+            hashing.recursivePosition(raw[i], hashtable, N , raw[i]%N);
         }
 
     }
