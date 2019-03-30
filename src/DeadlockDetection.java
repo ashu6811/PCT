@@ -9,12 +9,30 @@ public class DeadlockDetection {
     public  void cycleDetection ( GraphNode graphNode)
     {
         boolean IsCycle =false;
+        graphNode.resetVisited(graphNode);
+        cycleDetectionUtil(graphNode, IsCycle);
 
     }
 
     public  void cycleDetectionUtil(GraphNode graphNode, boolean IsCycle)
     {
+        graphNode.visited = true;
 
+        Iterator<GraphNode> i = graphNode.edge.listIterator();
+        while (i.hasNext())
+        {
+            GraphNode temp = i.next();
+            if (temp.visited == true)
+            {
+                IsCycle = true;
+                return;
+            }
+            else
+            {
+                
+            }
+
+        }
     }
     public static void main(String[] args)
     {

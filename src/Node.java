@@ -231,7 +231,7 @@ public class Node {
         }
         else
         {
-            return Integer.max(calculateHeight(root.left), calculateHeight(root.right) + 1);
+            return (Integer.max(calculateHeight(root.left), calculateHeight(root.right)) + 1);
         }
     }
 
