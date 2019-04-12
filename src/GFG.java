@@ -9,9 +9,14 @@ public class GFG {
 
         // Declare and Initialize an array
         int[] array = { 4, 4, 2, 2, 2, 2, 3, 3, 1, 1, 6, 7, 5 };
+        String[] array2 = {"abc", "bcd", "def" , "abc", "bcd" , "def" , "def" , "def", "aa", "bcd"  };
 
         Map<Integer, Integer> map = new HashMap<>();
         List<Integer> outputArray = new ArrayList<>();
+
+        Map<String, Integer> map2 = new HashMap<>();
+        List<String> outputArray2 = new ArrayList<>();
+
 
         // Assign elements and their count in the list and map
         for (int current : array) {
@@ -20,16 +25,36 @@ public class GFG {
             outputArray.add(current);
         }
 
+        for(int i =0 ; i<array2.length; i++)
+        {
+            int count = map2.getOrDefault(array2[i], 0);
+            map2.put(array2[i], count+1);
+            outputArray2.add(array2[i]);
+
+        }
+
+
         // Compare the map by value
         SortComparator comp = new SortComparator(map);
 
+        SortComparator2 comp2 = new SortComparator2(map2);
+
         // Sort the map using Collections CLass
         Collections.sort(outputArray, comp);
+
+        Collections.sort(outputArray2, comp2);
 
         // Final Output
         for (Integer i : outputArray) {
             System.out.print(i + " ");
         }
+        System.out.println();
+
+        for (String i : outputArray2) {
+            System.out.print(i + " ");
+        }
+
+
     }
 }
 
@@ -61,4 +86,29 @@ class SortComparator implements Comparator<Integer> {
         else
             return freqCompare;
     }
+
+}
+
+
+class SortComparator2 implements Comparator<String>
+{
+    private final Map<String, Integer> freqMap;
+
+    SortComparator2(Map<String, Integer> freqMap)
+    {
+        this.freqMap = freqMap;
+    }
+
+    public int compare(String k1, String k2)
+    {
+        int freqCompare = freqMap.get(k2).compareTo(freqMap.get(k1));
+
+        int valueCompare = k1.compareTo(k2);
+
+        if(freqCompare ==  0)
+            return valueCompare;
+        else
+            return freqCompare;
+    }
+
 }
