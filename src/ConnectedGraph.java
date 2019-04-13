@@ -49,7 +49,7 @@ public class ConnectedGraph {
 
         //Connected or not
         reset();
-        Integer counter =1;
+        Integer counter =0;
         for(GraphNode2 i: allNodes)
         {
             if(visited.get(i) == false)
